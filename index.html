@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SQUARE WARS</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css?v=11" />
+  </head>
+  <body>
+    <!-- Mode Select Modal -->
+    <div id="modeSelectModal" class="modal-overlay" aria-hidden="false">
+      <div class="modal">
+        <h2>Choose Game Mode</h2>
+        <p>Select how you want to play SQUARE WARS:</p>
+        <button class="single-player" onclick="setGameMode('single')">
+          🔴 Single Player<br /><small>vs Computer</small>
+        </button>
+        <button onclick="setGameMode('multi')">
+          🔵 Multiplayer<br /><small>2 Players</small>
+        </button>
+      </div>
+    </div>
+
+    <!-- Scoring Select Modal -->
+    <div
+      id="scoringSelectModal"
+      class="modal-overlay hidden"
+      aria-hidden="true"
+    >
+      <div class="modal">
+        <h2>Choose Scoring Style</h2>
+        <button class="classic-mode" onclick="setScoringMode('classic')">
+          🧱 Classic (Box Points)<br />
+          <small
+            >Each captured box is worth <strong>1 point</strong>. Simple, sharp,
+            and strategic.</small
+          >
+        </button>
+        <button class="area-mode" onclick="setScoringMode('area')">
+          🗺️ Territory Takedown (Area Mode)<br />
+          <small
+            >Score the <strong>number of squares</strong> inside a captured
+            zone. Overlaps let you <strong>steal</strong> territory!</small
+          >
+        </button>
+      </div>
+    </div>
+
+    <!-- Difficulty Select Modal -->
+    <div
+      id="difficultySelectModal"
+      class="modal-overlay hidden"
+      aria-hidden="true"
+    >
+      <div class="modal">
+        <h2>Choose Difficulty</h2>
+        <p>Select the AI difficulty level:</p>
+        <button class="beginner" onclick="setDifficulty('beginner')">
+          🟢 Beginner<br /><small>Fast & Friendly</small>
+        </button>
+        <button class="medium" onclick="setDifficulty('medium')">
+          🟡 Medium<br /><small>Balanced Challenge</small>
+        </button>
+        <button class="advanced" onclick="setDifficulty('advanced')">
+          🔴 Advanced<br /><small>Tough Opponent</small>
+        </button>
+        <button class="impossible" onclick="setDifficulty('impossible')">
+          🟣 Impossible<br /><small>Perfect Play</small>
+        </button>
+      </div>
+    </div>
+
+    <!-- Instructions Modal -->
+    <div id="instructionsModal" class="modal-overlay hidden" aria-hidden="true">
+      <div class="modal">
+        <h2 id="instructionsTitle">How to Play SQUARE WARS</h2>
+        <p id="instructionsBody"></p>
+        <button onclick="closeInstructions()">Got it, let's play!</button>
+      </div>
+    </div>
+
+    <!-- End Game Modal -->
+    <div id="endGameModal" class="modal-overlay hidden" aria-hidden="true">
+      <div class="modal">
+        <h2 id="endGameTitle">Game Over</h2>
+        <p id="endGameSubtitle">Winner: <strong>—</strong></p>
+        <button id="tryAgainBtn">🔄 Try Again</button>
+        <button id="changeModeBtn">🛠️ Change Mode</button>
+      </div>
+    </div>
+
+    <h1 id="gameTitle">SQUARE WARS</h1>
+
+    <div class="game-info">
+      <div class="scores">
+        <!-- New premium score cards (ids kept the same for JS) -->
+        <div class="score card player1" id="redScore">
+          <div class="badge">🔴</div>
+          <div class="labels">
+            <div class="name" id="redLabel">Player 1 (Red)</div>
+            <div class="hint">Territory</div>
+          </div>
+          <div class="value" id="redGames">0</div>
+        </div>
+
+        <div class="score card player2" id="blueScore">
+          <div class="badge">🔵</div>
+          <div class="labels">
+            <div class="name" id="blueLabel">Player 2 (Blue)</div>
+            <div class="hint">Territory</div>
+          </div>
+          <div class="value" id="blueGames">0</div>
+        </div>
+      </div>
+
+      <!-- Balance meter -->
+      <div class="score-meter" aria-label="Score balance">
+        <div class="meter red" id="scoreMeterRed"></div>
+        <div class="meter blue" id="scoreMeterBlue"></div>
+        <div class="meter-split"></div>
+      </div>
+
+      <div class="current-player-banner" id="currentPlayerBanner">
+        Current Player:
+        <span id="currentPlayer" class="player1">Player 1 (Red)</span>
+      </div>
+    </div>
+
+    <div class="grid-container">
+      <div class="grid" id="gameGrid"></div>
+      <div
+        id="outlineLayer"
+        style="
+          position: absolute;
+          inset: 12px;
+          pointer-events: none;
+          z-index: 20;
+        "
+      ></div>
+    </div>
+
+    <div class="controls">
+      <button onclick="startNewGame()">🎮 New Game</button>
+    </div>
+
+    <script type="module" src="./js/script.js?v=11"></script>
+  </body>
+</html>
